@@ -19,4 +19,18 @@ public class Produto {
   public void setNome(String nome){
     this.nome = nome;
   }
+
+  public Double getPreco(){
+    return preco;
+  }
+  public void setPreco(Double preco){
+    this.preco = preco;
+  }
+
+  public Integer getQuantidade(){
+    return quantidade;
+  }
+  public void setQuantidade(Integer quantidade){
+    this.quantidade = quantidade;
+  }
 }
