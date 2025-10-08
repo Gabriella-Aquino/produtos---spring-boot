@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import corporativos.produtos.atv2.models.Produto;
@@ -62,5 +63,23 @@ public class ProdutoController {
       return ResponseEntity.ok("Produto removido com sucesso!");
     }
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado");
+  }
+
+  @GetMapping("/produtos/search")
+  public ResponseEntity<List<Produto>> buscarPorNome(@RequestParam String nome) {
+    List<Produto> resultados = new ArrayList<>();
+
+    for (Produto produto : lista) {
+      if (produto.getNome() != null &&
+          produto.getNome().toLowerCase().contains(nome.toLowerCase())) {
+        resultados.add(produto);
+      }
+    }
+
+    if (resultados.isEmpty()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
+    return ResponseEntity.ok(resultados);
   }
 }
